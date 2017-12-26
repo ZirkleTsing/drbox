@@ -3,11 +3,13 @@ const { post, get } = require('../util/http')
 
 const ADD = 'ADD'
 const LOGIN = 'LOGIN'
+const CHAT_INFO = 'CHAT_INFO'
 
 
 const initialState = {
   count: 1,
   userInfo: {},
+  chartInfo: [],
 }
 
 function reducer(state = initialState, action) {
@@ -17,6 +19,9 @@ function reducer(state = initialState, action) {
     }
     case LOGIN: {
       return { ...state, userInfo: action.payload }
+    }
+    case CHAT_INFO: {
+      return { ...state, chartInfo: action.payload }
     }
     default: {
       return state
@@ -30,6 +35,10 @@ function add() {
 
 function register(userinfo) {
   return { type: LOGIN, payload: userinfo }
+}
+
+function chatInfo(info) {
+  return { type: CHAT_INFO, payload: info }
 }
 
 /* eslint-disable */
@@ -60,10 +69,23 @@ function getLogin(id) {
   }
 }
 
+function getChatInfo() {
+  return (dispatch) => {
+    get('/api/chart/getChatInfoByGoodsId', {
+      goods_id: 1,
+    })
+      .then((data) => {
+        console.log('收到:', data.p2pdata)
+        dispatch(chatInfo(data.p2pdata))
+      })
+  }
+}
+
 module.exports = {
   add,
   reducer,
   register,
   postRegister,
-  getLogin
+  getLogin,
+  getChatInfo
 }

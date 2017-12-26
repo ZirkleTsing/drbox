@@ -6,8 +6,16 @@ import FavoriteIcon from 'material-ui-icons/Favorite'
 import PersonPinIcon from 'material-ui-icons/PersonPin'
 import HelpIcon from 'material-ui-icons/Help'
 import PropTypes from 'prop-types'
+import Button from 'material-ui/Button'
+import Dialog, {
+// DialogActions,
+// DialogContent,
+// DialogContentText,
+// DialogTitle,
+} from 'material-ui/Dialog'
 // import TopicList from '../topic-list/index'
 import { tabs } from '../../util/utils'
+import LineChart from '../line-chart/line-chart'
 
 const TabContainer = ({ children }) => (
   <Typography>
@@ -18,6 +26,7 @@ const TabContainer = ({ children }) => (
 class TopicTabs extends React.Component {
   state = {
     tabIndex: 'all',
+    open: false,
     // open: true,
   }
 
@@ -46,6 +55,18 @@ class TopicTabs extends React.Component {
     return <PhoneIcon />
   }
 
+  show = () => {
+    this.setState({
+      open: true,
+    })
+  }
+
+  closeModal = () => {
+    this.setState({
+      open: false,
+    })
+  }
+
   render() {
     // console.log(`TopicTabs:`, this.props) // eslint-disable-line
     // console.log('state:', this.state.tabIndex) // eslint-disable-line
@@ -65,8 +86,17 @@ class TopicTabs extends React.Component {
             ))
           }
         </Tabs>
-        <div> TODO </div>
         {/* <TopicList /> */}
+        <Button onClick={this.show} color="primary">商品价格波动</Button>
+        <Dialog
+          open={this.state.open}
+          onClose={this.closeModal}
+          aria-labelledby="form-dialog-title"
+          fullWidth
+        >
+          <p>波动</p>
+          <LineChart />
+        </Dialog>
       </div>
     )
   }
