@@ -16,7 +16,8 @@ module.exports = (req, res, next) => {
     accesstoken: (needAccessToken && req.method === 'GET') ? user.accessToken : ''
   })
   if (query.needAccessToken) delete user.needAccessToken // 代理后不需要needAccessToken字段
-
+  console.log(`${BASE_URL}${path}`)
+  console.log(req.body)
   axios(`${BASE_URL}${path}`, {
     method: req.method,
     params: query,
@@ -26,16 +27,17 @@ module.exports = (req, res, next) => {
     // you can use one of the following options.
     // In a browser, you can use the URLSearchParams API or  using the qs library
     // In node.js, you can use the querystring module, instead, you can also use the qs library.
-    data: querystring.stringify(Object.assign({}, req.body, {
-      accesstoken: (needAccessToken && req.method === 'POST') ? user.accessToken : ''
-    })),
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    },
+    // data: querystring.stringify(Object.assign({}, req.body, {
+    //   accesstoken: (needAccessToken && req.method === 'POST') ? user.accessToken : ''
+    // })),
+    data: req.body,
+    // headers: {
+    //   'Content-Type': 'application/x-www-form-urlencoded'
+    // },
     timeout: 1 * 10 * 1000
   })
     .then(resp => {
-      if (resp.status === 200 && resp.data.success) {
+      if (resp.status === 200 && resp.data.errcode === 0) {
         res.send(resp.data)
       } else {
         res.status(resp.status).send(resp.data)

@@ -37,7 +37,7 @@ const get = (url, params) => (
     axios.get(parseUrl(url, params))
       .then((resp) => {
         const { data } = resp
-        if (data && data.success === true) {
+        if (data && data.errcode === 0) {
           resolve(data)
         } else {
           reject(data)
@@ -51,12 +51,12 @@ const get = (url, params) => (
  * params: query字符串 例如: /api/topics?name='chang'&age=12
  * postdata: post请求的body 例如: axios(path, obj)中的obj 参考 https://github.com/axios/axios
  */
-const post = (url, params, postdata) => (
+const post = (url, params) => (
   new Promise((resolve, reject) => {
-    axios.post(parseUrl(url, params, postdata))
+    axios.post(url, params)
       .then((resp) => {
         const { data } = resp
-        if (data && data.success === true) {
+        if (data && data.errcode === 0) {
           resolve(data)
         } else {
           reject(data)

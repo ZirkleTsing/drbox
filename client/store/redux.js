@@ -1,14 +1,13 @@
 // import { get } from '../util/http' // eslint-disable-line
-const { get } = require('../util/http')
+const { post, get } = require('../util/http')
 
 const ADD = 'ADD'
-const GET_TOPIC_LIST = 'GET_TOPIC_LIST'
-const GET_TOPIC_DETAIL = 'GET_TOPIC_DETAIL'
+const LOGIN = 'LOGIN'
+
 
 const initialState = {
   count: 1,
-  list: [],
-  detail: {},
+  userInfo: {},
 }
 
 function reducer(state = initialState, action) {
@@ -16,11 +15,8 @@ function reducer(state = initialState, action) {
     case ADD: {
       return { ...state, count: state.count + 1 }
     }
-    case GET_TOPIC_LIST: {
-      return { ...state, list: action.payload }
-    }
-    case GET_TOPIC_DETAIL: {
-      return { ...state, detail: action.payload }
+    case LOGIN: {
+      return { ...state, userInfo: action.payload }
     }
     default: {
       return state
@@ -32,41 +28,42 @@ function add() {
   return { type: ADD }
 }
 
-function topicList(list) { // eslint-disable-line
-  return { type: GET_TOPIC_LIST, payload: list }
+function register(userinfo) {
+  return { type: LOGIN, payload: userinfo }
 }
 
-function getTopicDetail(detail) {
-  return { type: GET_TOPIC_DETAIL, payload: detail }
-}
-
-function getTopicList(tab) {
+/* eslint-disable */
+function postRegister({ name, email, password }) {
   return (dispatch) => {
-    get('/api/topics', {
-      mdrender: false,
-      tab,
+    post('/api/user/adduser', {
+      name,
+      email,
+      password,
+      userStatus: true,
     })
-      .then((resp) => {
-        dispatch(topicList(resp.data))
+      .then((data) => {
+        console.log('收到:', data.p2pdata)
+        dispatch(register(data.p2pdata))
       })
   }
 }
-// eslint-disabled
-function getTopicDetailAsync(id) {
+
+function getLogin(id) {
   return (dispatch) => {
-    get(`/api/topic/${id}`)
-      .then((resp) => {
-        console.log(resp.data) // eslint-disable-line
-        dispatch(getTopicDetail(resp.data))
+    get('/api/user/getUserInfoById', {
+      id,
+    })
+      .then((data) => {
+        console.log('收到:', data.p2pdata)
+        dispatch(register(data.p2pdata))
       })
   }
 }
-// eslint-enable
 
 module.exports = {
   add,
-  getTopicList,
   reducer,
-  getTopicDetail,
-  getTopicDetailAsync,
+  register,
+  postRegister,
+  getLogin
 }

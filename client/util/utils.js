@@ -19,11 +19,9 @@ import App from '../App'
 // }
 
 export const tabs = {
-  all: '全部',
-  good: '精华',
-  share: '分享',
-  ask: '问答',
-  job: '招聘',
+  all: '首页',
+  good: '收藏',
+  share: '我的',
 }
 
 class WrapComponent extends React.Component {
