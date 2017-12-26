@@ -94,7 +94,6 @@ class TopicTabs extends React.Component {
           aria-labelledby="form-dialog-title"
           fullWidth
         >
-          <p>波动</p>
           <LineChart />
         </Dialog>
       </div>
