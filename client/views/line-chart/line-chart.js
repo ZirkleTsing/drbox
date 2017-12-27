@@ -37,8 +37,16 @@ class LineChart extends Component {
         labels: this.props.chartInfo.map((info) => info.update_at),
         datasets: [
           {
-            label: '价格波动曲线',
+            label: 'xx价格曲线',
             data: this.props.chartInfo.map((info) => info.goodsPrice),
+            backgroundColor: 'transparent', // 填充数据点
+            borderColor: '#F6A139',
+            fill: false, // How to fill the area under the line 这里不填充 http://www.chartjs.org/docs/latest/charts/line.html
+            borderWidth: 4,
+            pointStyle: 'line',
+            lineTension: 0, // set 0 to draw straight line
+            pointRadius: 0, // The radius of the point shape. If set to 0, the point is not rendered
+            pointHoverRadius: 0,
             // data: [149, 130, 123, 135, 140, 109, 132, 144, 138, 129, 100, 149],
             // backgroundColor: 'transparent', // 填充数据点
             // borderColor: '#F6A139',
@@ -55,7 +63,7 @@ class LineChart extends Component {
         responsive: true,
         title: {
           display:true,
-          text:'Chart.js Line Chart',
+          text:'价格波动图',
         },
         tooltips: {
           mode: 'index',
@@ -65,22 +73,30 @@ class LineChart extends Component {
           mode: 'nearest',
           intersect: true
         },
+        layout: {
+          padding: {
+            left: 0,
+            right: 0,
+            bottom: 0,
+            top: 0,
+          }
+        },
         scales: {
           xAxes: [{
-            display: true,
-            scaleLabel: {
               display: true,
-              labelString: 'Month'
-            }
+              scaleLabel: {
+                  display: true,
+                  labelString: '日期',
+              }
           }],
           yAxes: [{
-            display: true,
-            scaleLabel: {
-                display: true,
-                labelString: 'Value'
-            }
+              display: true,
+              scaleLabel: {
+                  display: true,
+                  labelString: '元',
+              }
           }]
-        }
+      }
     }
       console.log(<Line data={chartData} options={options} height={150} />)
       // console.log(window)
