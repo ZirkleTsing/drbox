@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import Button from 'material-ui/Button'
 import Dialog, {
 // DialogActions,
-// DialogContent,
+  DialogContent,
 // DialogContentText,
 // DialogTitle,
 } from 'material-ui/Dialog'
@@ -88,13 +88,18 @@ class TopicTabs extends React.Component {
         </Tabs>
         {/* <TopicList /> */}
         <Button onClick={this.show} color="primary">商品价格波动</Button>
+        {/* <LineChart /> */}
         <Dialog
           open={this.state.open}
           onClose={this.closeModal}
           aria-labelledby="form-dialog-title"
           fullWidth
         >
-          <LineChart />
+          <DialogContent>
+            {
+              this.state.open ? <LineChart /> : null
+            }
+          </DialogContent>
         </Dialog>
       </div>
     )

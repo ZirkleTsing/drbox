@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+// import { Line } from 'react-chartjs-2'
 import { getChatInfo } from '../../store/redux'
 
 class LineChart extends Component {
@@ -38,6 +39,7 @@ class LineChart extends Component {
           {
             label: '价格波动曲线',
             data: this.props.chartInfo.map((info) => info.goodsPrice),
+            // data: [149, 130, 123, 135, 140, 109, 132, 144, 138, 129, 100, 149],
             // backgroundColor: 'transparent', // 填充数据点
             // borderColor: '#F6A139',
             // fill: false, // How to fill the area under the line 这里不填充 http://www.chartjs.org/docs/latest/charts/line.html
@@ -81,12 +83,17 @@ class LineChart extends Component {
         }
     }
       console.log(<Line data={chartData} options={options} height={150} />)
+      // console.log(window)
       return (
-        <Line data={chartData} options={options} height={150} />
-        // <p>123</p>
+        <div style={{ width: '100%', height: 300 }}>
+          {
+            Line ? <Line data={chartData} options={options} height={150} /> : null
+          }
+        </div>
+        // <p>此处应有折线图</p>
       )
     }
-    return <p>123</p>
+    return <p></p>
   }
 }
 

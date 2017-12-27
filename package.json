@@ -50,7 +50,7 @@
   "dependencies": {
     "axios": "0.17.1",
     "body-parser": "1.18.2",
-    "chart.js": "^1.1.1",
+    "chart.js": "2.7.0",
     "classnames": "2.2.5",
     "cookie-session": "2.0.0-beta.3",
     "dateformat": "3.0.2",
@@ -68,7 +68,7 @@
     "query-string": "5.0.1",
     "react": "^16.2.0",
     "react-chartjs": "^0.8.0",
-    "react-chartjs-2": "^2.6.4",
+    "react-chartjs-2": "2.6.2",
     "react-dom": "^16.2.0",
     "react-head": "1.2.0",
     "react-jss": "8.1.0",

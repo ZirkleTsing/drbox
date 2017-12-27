@@ -3,6 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 // import Dashboard from '../views/dashboard/dashboard'
 // import User from '../views/user/user'
 import TopicTabs from '../views/topic-tabs/topic-tabs'
+import Chart from '../views/chart/chart'
 // import TopicDetail from '../views/topic-detail/topic-detail'
 
 export default class MyRoute extends React.Component {
@@ -10,6 +11,7 @@ export default class MyRoute extends React.Component {
     return [
       <Route path="/" exact render={() => <Redirect to="/dashboard" />} key="root" />,
       <Route path="/dashboard" exact component={TopicTabs} key="dashboard" />,
+      <Route path="/chart" exact component={Chart} key="chart" />,
       // <Route path="/topic/:id" exact component={TopicDetail} key="detail" />,
     ]
   }
