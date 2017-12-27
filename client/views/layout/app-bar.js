@@ -57,6 +57,9 @@ class MainAppBar extends React.Component {
 
   registerButtonClick = () => {
     this.setState({
+      name: '',
+      email: '',
+      pwd: '',
       openRegister: true,
     })
   }
@@ -119,9 +122,16 @@ class MainAppBar extends React.Component {
             <Typography type="title" color="inherit" className={classes.flex}>
               心愿盒
             </Typography>
-            <Button raised color="accent" onClick={this.registerButtonClick} className={classes.buttonMargin}>
-              注册
-            </Button>
+            {
+              this.props.userInfo.name ?
+              null
+              :
+              (
+                <Button raised color="accent" onClick={this.registerButtonClick} className={classes.buttonMargin}>
+                  注册
+                </Button>
+              )
+            }
             {
               this.props.userInfo.name ?
                 <div>你好, {this.props.userInfo.name}</div>
