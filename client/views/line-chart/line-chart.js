@@ -101,7 +101,7 @@ class LineChart extends Component {
       console.log(<Line data={chartData} options={options} height={150} />)
       // console.log(window)
       return (
-        <div style={{ width: '100%', height: 300 }}>
+        <div>
           {
             Line ? <Line data={chartData} options={options} height={150} /> : null
           }
