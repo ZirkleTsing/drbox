@@ -11,12 +11,12 @@ const config = {
   module: {
     rules: [
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /.(js|jsx)$/,
         exclude: [
-          path.join(__dirname, '../node_modules'),
+          path.join(__dirname, '../node_modules')
         ],
-        loader: "eslint-loader",
+        loader: 'eslint-loader'
       },
       {
         test: /.js$/,
@@ -24,6 +24,10 @@ const config = {
         exclude: [
           path.join(__dirname, '../node_modules')
         ]
+      },
+      {
+        test: /\.(png|jpg)$/,
+        loader: 'url-loader?limit=8192'
       }
     ]
   }

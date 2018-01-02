@@ -56,6 +56,7 @@ const post = (url, params) => (
     axios.post(url, params)
       .then((resp) => {
         const { data } = resp
+        console.log('post返回:', data) //eslint-disable-line
         if (data && data.errcode === 0) {
           resolve(data)
         } else {

@@ -7,6 +7,7 @@ import PersonPinIcon from 'material-ui-icons/PersonPin'
 import HelpIcon from 'material-ui-icons/Help'
 import PropTypes from 'prop-types'
 import Button from 'material-ui/Button'
+import { withStyles } from 'material-ui/styles'
 import Dialog, {
 // DialogActions,
   DialogContent,
@@ -16,6 +17,18 @@ import Dialog, {
 // import TopicList from '../topic-list/index'
 import { tabs } from '../../util/utils'
 import LineChart from '../line-chart/line-chart'
+import Search from '../search/search'
+import Favorite from '../favorite/favorite'
+
+const styles = () => ({
+  tabWrapper: {
+    display: 'flex',
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 150,
+  },
+})
 
 const TabContainer = ({ children }) => (
   <Typography>
@@ -70,6 +83,7 @@ class TopicTabs extends React.Component {
   render() {
     // console.log(`TopicTabs:`, this.props) // eslint-disable-line
     // console.log('state:', this.state.tabIndex) // eslint-disable-line
+    const { classes } = this.props
     return (
       <div>
         <Tabs
@@ -86,9 +100,12 @@ class TopicTabs extends React.Component {
             ))
           }
         </Tabs>
-        {/* <TopicList /> */}
         <Button onClick={this.show} color="primary">商品价格波动</Button>
-        {/* <LineChart /> */}
+        <div className={classes.tabWrapper}>
+          { this.state.tabIndex === 'all' && <Search /> }
+          { this.state.tabIndex === 'good' && <Favorite /> }
+          { this.state.tabIndex === 'share' && <div>789</div> }
+        </div>
         <Dialog
           open={this.state.open}
           onClose={this.closeModal}
@@ -116,7 +133,8 @@ TabContainer.propTypes = {
 
 TopicTabs.propTypes = {
   history: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
   // location: PropTypes.object.isRequired,
 }
 
-export default TopicTabs
+export default withStyles(styles)(TopicTabs)

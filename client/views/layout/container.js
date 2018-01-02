@@ -9,6 +9,7 @@ const styles = {
     marginRight: 10,
     marginBottom: 30,
     marginLeft: 10,
+    minHeight: 800,
   },
 }
 

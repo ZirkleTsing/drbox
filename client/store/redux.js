@@ -4,12 +4,15 @@ const { post, get } = require('../util/http')
 const ADD = 'ADD'
 const LOGIN = 'LOGIN'
 const CHAT_INFO = 'CHAT_INFO'
-
+const ADD_GOODS_INFO = 'ADD_GOODS_INFO'
+const FAVORITE = 'FAVORITE'
 
 const initialState = {
   count: 1,
   userInfo: {},
   chartInfo: [],
+  goodsInfo: [],
+  favorite: [],
 }
 
 function reducer(state = initialState, action) {
@@ -22,6 +25,12 @@ function reducer(state = initialState, action) {
     }
     case CHAT_INFO: {
       return { ...state, chartInfo: action.payload }
+    }
+    case ADD_GOODS_INFO: {
+      return { ...state, goodsInfo: action.payload }
+    }
+    case FAVORITE: {
+      return { ...state, favorite: action.payload }
     }
     default: {
       return state
@@ -39,6 +48,14 @@ function register(userinfo) {
 
 function chatInfo(info) {
   return { type: CHAT_INFO, payload: info }
+}
+
+function goodInfo(info) {
+  return { type: ADD_GOODS_INFO, payload: info }
+}
+
+function favorite(info) {
+  return { type: FAVORITE, payload: info }
 }
 
 /* eslint-disable */
@@ -81,11 +98,40 @@ function getChatInfo() {
   }
 }
 
+function getGoodsInfo(userId) {
+  return (dispatch) => {
+    get('/api/goods/getGoodsInfoByUserId', {
+      userId
+    })
+      .then((data) => {
+        console.log('收到:', data.p2pdata)
+        dispatch(favorite(data.p2pdata))
+      })
+  }
+}
+
+function postAddGoodInfo(goodsUrl, userId) {
+  console.log('参数:', goodsUrl, userId)
+  return (dispatch) => {
+    post('/api/goods/addGoodsInfo',{
+      userId,
+      goodsUrl,
+      goodsStatus: true,
+    })
+      .then((data) => {
+        console.log('收到:', data.p2pdata)
+        dispatch(goodInfo(data.p2pdata))
+      })
+  }
+}
+
 module.exports = {
   add,
   reducer,
   register,
   postRegister,
   getLogin,
-  getChatInfo
+  getChatInfo,
+  postAddGoodInfo,
+  getGoodsInfo
 }
