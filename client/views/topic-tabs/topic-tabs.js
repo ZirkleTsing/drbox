@@ -6,7 +6,7 @@ import FavoriteIcon from 'material-ui-icons/Favorite'
 import PersonPinIcon from 'material-ui-icons/PersonPin'
 import HelpIcon from 'material-ui-icons/Help'
 import PropTypes from 'prop-types'
-import Button from 'material-ui/Button'
+// import Button from 'material-ui/Button'
 import { withStyles } from 'material-ui/styles'
 import Dialog, {
 // DialogActions,
@@ -100,7 +100,7 @@ class TopicTabs extends React.Component {
             ))
           }
         </Tabs>
-        <Button onClick={this.show} color="primary">商品价格波动</Button>
+        {/* <Button onClick={this.show} color="primary">商品价格波动</Button> */}
         <div>
           { this.state.tabIndex === 'all' && <div className={classes.tabWrapper}><Search /></div> }
           { this.state.tabIndex === 'good' && <Favorite /> }
