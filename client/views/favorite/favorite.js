@@ -21,7 +21,14 @@ import Typography from 'material-ui/Typography'
 import FolderIcon from 'material-ui-icons/Folder'
 import DeleteIcon from 'material-ui-icons/Delete'
 // import Chip from 'material-ui/Chip'
+import LineChart from '../line-chart/line-chart'
 import icon from './icon.png'
+import Dialog, {
+  // DialogActions,
+    DialogContent,
+  // DialogContentText,
+  // DialogTitle,
+  } from 'material-ui/Dialog'
 
 const styles = theme => ({
   chip: {
@@ -45,8 +52,26 @@ const styles = theme => ({
 })
 
 class Favorite extends React.Component {
+  state = {
+    open: false,
+    id: 1,
+    // open: true,
+  }
   componentDidMount() {
     this.props.getGoodsInfo(this.props.userInfo.id)
+  }
+
+  closeModal = () => {
+    this.setState({
+      open: false,
+    })
+  }
+
+  showModal = (id) => () => {
+    this.setState({
+      open: true,
+      id,
+    })
   }
 
   go = (url) => () => {
@@ -64,7 +89,7 @@ class Favorite extends React.Component {
               this.props.favorite.map((ele) => {
                 console.log(marked(ele.goodsName))
                 return (
-                  <ListItem button key={ele.goodsUrl}>
+                  <ListItem onClick={this.showModal(ele.id)} button key={ele.goodsUrl}>
                     <ListItemIcon>
                       <Avatar alt="头像" src={icon}/>
                     </ListItemIcon>
@@ -84,6 +109,18 @@ class Favorite extends React.Component {
               null
           }
         </List>
+        <Dialog
+          open={this.state.open}
+          onClose={this.closeModal}
+          aria-labelledby="form-dialog-title"
+          fullWidth
+        >
+          <DialogContent>
+            {
+              this.state.open ? <LineChart id={this.state.id} /> : null
+            }
+          </DialogContent>
+        </Dialog>
       </div>
     )
   }

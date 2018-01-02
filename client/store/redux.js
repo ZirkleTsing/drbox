@@ -86,10 +86,10 @@ function getLogin(id) {
   }
 }
 
-function getChatInfo() {
+function getChatInfo(id) {
   return (dispatch) => {
     get('/api/chart/getChatInfoByGoodsId', {
-      goods_id: 1,
+      goods_id: id,
     })
       .then((data) => {
         console.log('收到:', data.p2pdata)

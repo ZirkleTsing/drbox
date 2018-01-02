@@ -16,7 +16,7 @@ class LineChart extends Component {
   }
 
   componentWillMount() {
-    this.props.getChatInfo()
+    this.props.getChatInfo(this.props.id)
   }
 
   componentDidMount() {
