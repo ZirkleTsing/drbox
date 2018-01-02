@@ -101,10 +101,10 @@ class TopicTabs extends React.Component {
           }
         </Tabs>
         <Button onClick={this.show} color="primary">商品价格波动</Button>
-        <div className={classes.tabWrapper}>
-          { this.state.tabIndex === 'all' && <Search /> }
+        <div>
+          { this.state.tabIndex === 'all' && <div className={classes.tabWrapper}><Search /></div> }
           { this.state.tabIndex === 'good' && <Favorite /> }
-          { this.state.tabIndex === 'share' && <div>789</div> }
+          { this.state.tabIndex === 'share' && <div>我 李星熠 演员</div> }
         </div>
         <Dialog
           open={this.state.open}
